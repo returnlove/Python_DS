@@ -5,23 +5,25 @@ from sklearn.datasets.samples_generator import make_blobs
 from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances_argmin
 from sklearn.datasets import load_digits
+from sklearn.metrics import accuracy_score
+from scipy.stats import mode
 
-X, y_true = make_blobs(n_samples = 300, centers = 4, cluster_std = 0.60, random_state = 0)
-##print(X[:5])
-##print(y_true[:5])
-plt.scatter(X[:,0],X[:,1])
-##plt.show()
-
-
-kmeans = KMeans(n_clusters = 4)
-kmeans.fit(X)
-y_pred = kmeans.predict(X)
-print('cluster centers: ',kmeans.cluster_centers_)
-centers = kmeans.cluster_centers_
-
-plt.scatter(X[:,0], X[:,1], c = y_pred)
-plt.scatter(centers[:,0], centers[:,1], c = 'black', s = 100)
-##plt.show()
+##X, y_true = make_blobs(n_samples = 300, centers = 4, cluster_std = 0.60, random_state = 0)
+####print(X[:5])
+####print(y_true[:5])
+##plt.scatter(X[:,0],X[:,1])
+####plt.show()
+##
+##
+##kmeans = KMeans(n_clusters = 4)
+##kmeans.fit(X)
+##y_pred = kmeans.predict(X)
+##print('cluster centers: ',kmeans.cluster_centers_)
+##centers = kmeans.cluster_centers_
+##
+##plt.scatter(X[:,0], X[:,1], c = y_pred)
+##plt.scatter(centers[:,0], centers[:,1], c = 'black', s = 100)
+####plt.show()
 
 ''' Expectation–maximization (E–M) is a powerful algorithm that comes up
 in a variety of contexts within data science. k-means is a particularly
@@ -42,26 +44,142 @@ the data in each cluster to find out the cluster centers.
 
 # k-means on digits data
 
-digits = load_digits()
-print('digits obj', dir(digits))
-print(digits.data.shape)
-print(digits.data[0])
+##digits = load_digits()
+##print('digits obj', dir(digits))
+##print(digits.data.shape)
+##print(digits.data[0])
+##
+##kmeans = KMeans(n_clusters = 10)
+##kmeans.fit(digits.data)
+##print(len(kmeans.cluster_centers_) )
+##print(kmeans.cluster_centers_[0])
+##print(len(kmeans.cluster_centers_[0]))
 
-kmeans = KMeans(n_clusters = 10)
-kmeans.fit(digits.data)
-print(len(kmeans.cluster_centers_) )
-print(kmeans.cluster_centers_[0])
-print(len(kmeans.cluster_centers_[0]))
+
+## predictions
+
+##Question - how to validate the prediction? 
+
+##pred = kmeans.predict(digits.data)
+##print('predictions:',pred[:1])
+##print('actual labels:',digits.target[:1])
+##print('acc score', accuracy_score(digits.target, pred))
+##
+##labels = np.zeros_like(pred)
+##print('labels:', labels)
+##print('labels len:', len(labels))
+
+##for i in range(10):
+##    mask = (pred == i)
+##    labels[mask] = mode(digits.target[mask])[0]
+##    print('i', i, 'pred == ', mask, 'labels[mask]', labels[mask])
+##
+##print('labels:', labels)
+
+    
 
 ##clusters = kmeans.fit_predict(digits.data)
 ##print('clusters obj', clusters)
 ##print('clusters len', len(clusters))
 ##print(set(clusters))
 
-fig, ax = plt.subplots(2, 5, figsize=(8, 3))
-centers = kmeans.cluster_centers_.reshape(10, 8, 8)
-for axi, center in zip(ax.flat, centers):
-    axi.set(xticks=[], yticks=[])
-    axi.imshow(center, interpolation='nearest', cmap=plt.cm.binary)
+##fig, ax = plt.subplots(2, 5, figsize=(8, 3))
+##centers = kmeans.cluster_centers_.reshape(10, 8, 8)
+##for axi, center in zip(ax.flat, centers):
+##    axi.set(xticks=[], yticks=[])
+##    axi.imshow(center, interpolation='nearest', cmap=plt.cm.binary)
+##
+##plt.show()
 
-plt.show()
+
+
+
+
+##kmeans for color compression
+
+from sklearn.datasets import load_sample_image
+china = load_sample_image("china.jpg")
+##ax = plt.axes(xticks=[], yticks=[])
+ax = plt.axes()
+ax.imshow(china);
+##plt.show()
+
+print(china.shape)
+print(china[:1][0])
+
+
+print('completed execution.')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
